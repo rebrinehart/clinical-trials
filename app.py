@@ -264,38 +264,44 @@ app.layout = html.Div([
     # for the title
     html.Div([
         html.H1('Clinical Trials Dashboard')
-
     ], id = 'title'),
 
     #for the entire top half
     html.Div([
-        # left hand group of 4
+        # top left group
         html.Div([
-
-            # left hand group of 3
-            html.Div([
-                # top half
+                # top half description
                 html.Div([
-                    dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-text')])], className = 'six columns', id = 'left-card'),
-                    dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-text')])], className = 'six columns', id = 'right-card'),
-                ], className = 'row', id = 'card-half'),
-                # bottom half
+                    dbc.Card([dbc.CardBody([html.P('An analysis of clinical trials with a status of withdrawn, suspended, or terminated —  here referred to as halted trials — to see which medical conditions, phases, or sponsors were historically most halted.', className = 'card-text')])], className = 'row', id = 'desc-card'),
+                    # dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'three columns', id = 'trials-card'),
+                    # dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'three columns', id = 'sponsors-card'),
+                ], className = 'row', id = 'desc-div'),
+                # bottom half with plots
                 html.Div([
-                    html.H4('Halted Trials'),
-                    dcc.Graph(figure = pie, id = 'pie'),
-                ], className = 'row', id = 'pie-half'),
-            ], className = 'six columns', id = '3-cluster'),
-            #waffle chart
-            html.Div([
-                html.H4('Halted Trial Statuses'),
-                dcc.Graph(figure = waf, id = 'waf')
-            ], className = 'six columns', id = 'waffle-chart'),
+                    # pie chart
+                    html.Div([
+                        html.H4('Halted Trials'),
+                        dcc.Graph(figure = pie, id = 'pie'),
+                    ], className = 'six columns', id = 'pie-div'),
+                    # waffle chart
+                    html.Div([
+                        html.H4('Halted Trial Statuses'),
+                        dcc.Graph(figure = waf, id = 'waf')
+                    ], className = 'six columns', id = 'waffle-div'),
+                ], className = 'row')           
         ], className = 'six columns', id = 'top-left'),
-        #right hand graph
+        #top right group
         html.Div([
-            dcc.Graph(figure = scatter, id = 'scatter'),
+            html.Div([
+                    dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'six columns', id = 'trials-card'),
+                    dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'six columns', id = 'sponsors-card'),                
+                ], className = 'row', id = 'card-div'),
+            html.Div([
+                dcc.Graph(figure = scatter, id = 'scatter'),
+            ], className = 'row', id = 'scatter-div')                
         ], className = 'six columns', id = 'top-right')
     ], className = 'row', id = 'top-half'),
+
 
     #for entire bottom half
     html.Div([
