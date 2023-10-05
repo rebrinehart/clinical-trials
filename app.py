@@ -18,7 +18,7 @@ import dash
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 
-clin_trials = pd.read_csv(r"C:\Users\RebeccaR\Documents\Data Projects\clinical-trials\clin_trials.csv")
+clin_trials = pd.read_csv(r"clin_trials.csv")
 clin_trials.head()
 
 """# Graphs"""
