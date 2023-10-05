@@ -18,8 +18,7 @@ import dash
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 
-url = 'https://raw.githubusercontent.com/rebrinehart/clinical-trials/main/clin_trials.csv?token=GHSAT0AAAAAACH2FARNLKW4JFUD7LRGISPKZI6GJLA'
-clin_trials = pd.read_csv(url)
+clin_trials = pd.read_csv(r"C:\Users\RebeccaR\Documents\Data Projects\clinical-trials\clin_trials.csv")
 clin_trials.head()
 
 """# Graphs"""
@@ -161,7 +160,7 @@ waf.update_layout(
                    title_y = .95,
                    font = dict(size = 16),
                    legend = dict(orientation = 'h',
-                                 entrywidth = 150,
+                                 itemwidth = 150,
                                  yanchor = 'bottom',
                                  y = -.1,
                                  xanchor = 'left',
