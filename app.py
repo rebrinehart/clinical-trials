@@ -44,7 +44,9 @@ scatter = px.scatter(data_frame = total_trials,
 
 scatter.update_layout(title_x = .5,
                    title_y = .9,
-                   font = dict(size = 14))
+                   font = dict(size = 14),
+                   margin = dict(l = 5, r = 5, t = 5, b = 5)
+                   )
 scatter.update(layout_showlegend = False)
 
 "DONUT CHART"
@@ -69,6 +71,8 @@ pie = go.Figure(go.Pie(labels = ['Halted', 'Other'],
                        textposition = 'outside',
                        #textfont = dict()
                       ))
+pie.update_layout(
+    margin = dict(l = 0, r = 0, t = 0, b = 0))
 
 "WAFFLE CHART"
 dfs = []
@@ -154,6 +158,7 @@ waf.update_layout(
                    title_x = .5,
                    title_y = .95,
                    font = dict(size = 16),
+                   margin = dict(l = 5, r = 5, t = 5, b = 5),
                    legend = dict(orientation = 'h',
                                  itemwidth = 150,
                                  yanchor = 'bottom',
@@ -210,6 +215,7 @@ bar1.add_trace(go.Bar(name = 'Total Trials',
 bar1.update_layout(
                   barmode = 'stack',
                   yaxis_title = 'Clinical Trials',
+                  margin = dict(l = 5, r = 5, t = 5, b = 5),
                   legend = dict(
                       orientation = 'h',
                       yanchor = 'bottom',
@@ -223,18 +229,18 @@ bar1.update_layout(
 
 "BAR CHART"
 bar2 = go.Figure(data = [
-    go.Bar(name = 'Withdrawn (%)', 
-           y = haltsp_df['% Withdrawn wrt Sponsor Total'],
+    go.Bar(name = 'Withdrawn', 
+           y = haltsp_df['Withdrawn Trials'],
            x = haltsp_df.index.values,
            marker = dict(color = 'rgb(252, 141, 98)')
           ),
-    go.Bar(name = 'Suspended (%)', 
-           y = haltsp_df['% Suspended wrt Sponsor Total'],
+    go.Bar(name = 'Suspended', 
+           y = haltsp_df['Suspended Trials'],
            x = haltsp_df.index.values,
            marker = dict(color = 'rgb(252, 200, 179)')
           ),
-    go.Bar(name = 'Terminated (%)', 
-           y = haltsp_df['% Terminated wrt Sponsor Total'],
+    go.Bar(name = 'Terminated', 
+           y = haltsp_df['Terminated Trials'],
            x = haltsp_df.index.values,
            marker = dict(color = 'rgb(252, 100, 179)')
           ),
@@ -242,6 +248,7 @@ bar2 = go.Figure(data = [
 
 bar2.update_layout(barmode = 'stack',
                   yaxis_title = 'Clinical Trials',
+                  margin = dict(l = 5, r = 5, t = 5, b = 5),
                   legend = dict(
                       orientation = 'h',
                       yanchor = 'bottom',
@@ -251,8 +258,6 @@ bar2.update_layout(barmode = 'stack',
                   xaxis = dict(ticktext = ['test'])
                  )
 
-
-
 "----------------------------------------------------------------------------------"
 """# Create Dashboard"""
 
@@ -261,59 +266,63 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    # for the title
-    html.Div([
-        html.H1('Clinical Trials Dashboard')
-    ], id = 'title'),
 
-    #for the entire top half
-    html.Div([
-        # top left group
+        # for the title
         html.Div([
-                # top half description
+            html.H1('Clinical Trials Dashboard')
+        ], id = 'title'),
+        
+        #for the top row
+        html.Div([
+            # top half description
+            html.Div([
+                dbc.Card([dbc.CardBody([html.P('An analysis of clinical trials with a status of withdrawn, suspended, or terminated —  here referred to as halted trials — to see which medical conditions, phases, or sponsors were historically most halted.', className = 'card-text')])], className = 'row', id = 'desc-card'),
+            ], className = 'six columns', id = 'desc-div'),            
+            html.Div([
+                dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'six columns', id = 'trials-card'),
+                dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'six columns', id = 'sponsors-card'),                
+            ], className = 'six columns', id = 'card-div'),
+        ], className = 'row', id = 'top-row'),
+        
+        #for the entire middle row
+        html.Div([
+            #left half
+            html.Div([
+                # pie chart
                 html.Div([
-                    dbc.Card([dbc.CardBody([html.P('An analysis of clinical trials with a status of withdrawn, suspended, or terminated —  here referred to as halted trials — to see which medical conditions, phases, or sponsors were historically most halted.', className = 'card-text')])], className = 'row', id = 'desc-card'),
-                    # dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'three columns', id = 'trials-card'),
-                    # dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'three columns', id = 'sponsors-card'),
-                ], className = 'row', id = 'desc-div'),
-                # bottom half with plots
+                    html.H4('Halted Trials'),
+                    dcc.Graph(figure = pie, id = 'pie'),
+                ], className = 'six columns', id = 'pie-div'),
+                # waffle chart
                 html.Div([
-                    # pie chart
-                    html.Div([
-                        html.H4('Halted Trials'),
-                        dcc.Graph(figure = pie, id = 'pie'),
-                    ], className = 'six columns', id = 'pie-div'),
-                    # waffle chart
-                    html.Div([
-                        html.H4('Halted Trial Statuses'),
-                        dcc.Graph(figure = waf, id = 'waf')
-                    ], className = 'six columns', id = 'waffle-div'),
-                ], className = 'row')           
-        ], className = 'six columns', id = 'top-left'),
-        #top right group
+                    html.H4('Statuses'),
+                    dcc.Graph(figure = waf, id = 'waf')
+                ], className = 'six columns', id = 'waffle-div'),
+            ], className = 'six columns', id = 'mid-left'),       
+            #right half
+            html.Div([
+                html.Div([
+                    html.H4('Trial Volume'),
+                    dcc.Graph(figure = scatter, id = 'scatter'),
+                ], className = 'row', id = 'scatter-div')                
+            ], className = 'six columns', id = 'mid-right')
+        ], className = 'row', id = 'mid-row'),
+    
+        #for entire bottom row
         html.Div([
             html.Div([
-                    dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'six columns', id = 'trials-card'),
-                    dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'six columns', id = 'sponsors-card'),                
-                ], className = 'row', id = 'card-div'),
+                html.H4('Total trial count by status'),
+                dcc.Graph(figure = bar1, id = 'bar1'),
+            ], className = 'six columns', id = 'bottom-left'),
+    
             html.Div([
-                dcc.Graph(figure = scatter, id = 'scatter'),
-            ], className = 'row', id = 'scatter-div')                
-        ], className = 'six columns', id = 'top-right')
-    ], className = 'row', id = 'top-half'),
+                html.H4('Halted trial count by status'),
+                dcc.Graph(figure = bar2, id = 'bar2'),
+            ], className = 'six columns', id = 'bottom-right'),
+        ], className = 'row', id = 'bot-row'),
+], id='whole-div')
 
-
-    #for entire bottom half
-    html.Div([
-        html.Div([
-            dcc.Graph(figure = bar1, id = 'bar1'),
-        ], className = 'six columns', id = 'bottom-left'),
-
-        html.Div([
-            dcc.Graph(figure = bar2, id = 'bar2'),
-        ], className = 'six columns', id = 'bottom-right'),
-    ], className = 'row', id = 'bottom-half'),
-])
 
 if __name__ == '__main__':
     app.run(debug=True, jupyter_mode = 'external')
+
