@@ -9,9 +9,6 @@ Original file is located at
 
 import pandas as pd
 import numpy as np
-import scipy.stats as stats
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
 import dash
@@ -21,8 +18,10 @@ import dash_bootstrap_components as dbc
 clin_trials = pd.read_csv(r"clin_trials.csv")
 clin_trials.head()
 
+"------------------------------------------------------------------------------------"
 """# Graphs"""
 
+"SCATTER PLOT"
 # create a pivot table based on sponsor and start date
 trialcounts_df = clin_trials.groupby(['Sponsor', 'Start_Date']).size().reset_index(name = 'Count')
 trialcounts_df = trialcounts_df.pivot_table(index = 'Sponsor', columns = 'Start_Date', values = 'Count', fill_value = 0)
@@ -47,8 +46,8 @@ scatter.update_layout(title_x = .5,
                    title_y = .9,
                    font = dict(size = 14))
 scatter.update(layout_showlegend = False)
-scatter.show()
 
+"DONUT CHART"
 # place all halted trials in their own dataframe
 halt_df = clin_trials[clin_trials['Status'].isin(['Withdrawn', 'Terminated', 'Suspended'])]
 
@@ -70,12 +69,8 @@ pie = go.Figure(go.Pie(labels = ['Halted', 'Other'],
                        textposition = 'outside',
                        #textfont = dict()
                       ))
-pie.update_layout()
 
-
-pie.show()
-
-# @title
+"WAFFLE CHART"
 dfs = []
 halt_pct = pd.DataFrame(columns = ['Status', 'Count',
                                     'pct'
@@ -172,8 +167,8 @@ waf.update_layout(
 waf.update_yaxes(showticklabels = False)
 waf.update_xaxes(showticklabels = False)
 
-waf.show()
 
+"BAR CHART - TOTAL VS HALTED"
 # share of all halted trials by sponsor
 haltsp_df = pd.DataFrame()
 haltsp_df['Total Trials'] = clin_trials.groupby(['Sponsor']).size()
@@ -199,7 +194,6 @@ haltsp_df['% Suspended wrt Sponsor Total'] = (haltsp_df['Suspended Trials'] / ha
 
 haltsp_df = haltsp_df.sort_values(by = 'Total Trials', ascending = False)
 
-# @title
 # create the bar chart
 bar1 = go.Figure()
 bar1.add_trace(go.Bar(name = 'Halted Trials',
@@ -227,8 +221,39 @@ bar1.update_layout(
 #                                xanchor = 'left')
                  )
 
-bar1.show()
+"BAR CHART"
+bar2 = go.Figure(data = [
+    go.Bar(name = 'Withdrawn (%)', 
+           y = haltsp_df['% Withdrawn wrt Sponsor Total'],
+           x = haltsp_df.index.values,
+           marker = dict(color = 'rgb(252, 141, 98)')
+          ),
+    go.Bar(name = 'Suspended (%)', 
+           y = haltsp_df['% Suspended wrt Sponsor Total'],
+           x = haltsp_df.index.values,
+           marker = dict(color = 'rgb(252, 200, 179)')
+          ),
+    go.Bar(name = 'Terminated (%)', 
+           y = haltsp_df['% Terminated wrt Sponsor Total'],
+           x = haltsp_df.index.values,
+           marker = dict(color = 'rgb(252, 100, 179)')
+          ),
+])
 
+bar2.update_layout(barmode = 'stack',
+                  yaxis_title = 'Clinical Trials',
+                  legend = dict(
+                      orientation = 'h',
+                      yanchor = 'bottom',
+                      y = -.2,
+                      xanchor = 'center',
+                      x= .5),
+                  xaxis = dict(ticktext = ['test'])
+                 )
+
+
+
+"----------------------------------------------------------------------------------"
 """# Create Dashboard"""
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -251,7 +276,7 @@ app.layout = html.Div([
             html.Div([
                 # top half
                 html.Div([
-                    dbc.Card([dbc.CardBody([html.H4('13K', className = 'card-text')])], className = 'six columns', id = 'left-card'),
+                    dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-text')])], className = 'six columns', id = 'left-card'),
                     dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-text')])], className = 'six columns', id = 'right-card'),
                 ], className = 'row', id = 'card-half'),
                 # bottom half
@@ -266,7 +291,7 @@ app.layout = html.Div([
         ], className = 'six columns', id = 'top-left'),
         #right hand graph
         html.Div([
-            dcc.Graph(figure = scatter, id = 'scatter1'),
+            dcc.Graph(figure = scatter, id = 'scatter'),
         ], className = 'six columns', id = 'top-right')
     ], className = 'row', id = 'top-half'),
 
@@ -277,7 +302,7 @@ app.layout = html.Div([
         ], className = 'six columns', id = 'bottom-left'),
 
         html.Div([
-            dcc.Graph(figure = scatter, id = 'scatter2'),
+            dcc.Graph(figure = bar2, id = 'bar2'),
         ], className = 'six columns', id = 'bottom-right'),
     ], className = 'row', id = 'bottom-half'),
 ])
