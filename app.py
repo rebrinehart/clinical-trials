@@ -39,7 +39,7 @@ total_trials
 #creating the figure
 scatter = px.scatter(data_frame = total_trials,
 #                   title = '<b>Clinical Trials Per Year from 1984 - 2020<b>',
-                  labels = {'Start_Date':'Trial Start Date', 'value': 'Number of Trials'},
+                  labels = {'index':'Trial Start Date', 'value': 'Number of Trials'},
                   color_discrete_sequence = [px.colors.qualitative.Pastel[0]])
 
 scatter.update_layout(title_x = .5,
@@ -263,7 +263,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div([
     # for the title
     html.Div([
-        html.H1('Clinical Trials')
+        html.H1('Clinical Trials Dashboard')
 
     ], id = 'title'),
 
@@ -281,11 +281,13 @@ app.layout = html.Div([
                 ], className = 'row', id = 'card-half'),
                 # bottom half
                 html.Div([
+                    html.H4('Halted Trials'),
                     dcc.Graph(figure = pie, id = 'pie'),
                 ], className = 'row', id = 'pie-half'),
             ], className = 'six columns', id = '3-cluster'),
             #waffle chart
             html.Div([
+                html.H4('Halted Trial Statuses'),
                 dcc.Graph(figure = waf, id = 'waf')
             ], className = 'six columns', id = 'waffle-chart'),
         ], className = 'six columns', id = 'top-left'),
