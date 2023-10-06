@@ -1,30 +1,26 @@
-body {
-    font-family: Helvetica, sans-serif;
-}
 
 #desc-div {
     background-color: whitesmoke;
-    padding: 10px;
-    border-radius: 10px;
-    width: 48%;
-    height: 120px;
+    border-radius: 15px;
+    width: 55%;
+    height: 100%;
 }
 
 #pie-div {
     background-color: whitesmoke;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 5px;
 }
 
 #pie {
     width: 100%;
-    height: 75%;
+    height: 50%;
     box-sizing: border-box;
 }
 
 #waffle-div {
     background-color: whitesmoke;
-    border-radius: 10px;
+    border-radius: 15px;
     height: 60%;
     padding: 5px;
 }
@@ -35,94 +31,105 @@ body {
 }
 
 #card-div {
-    margin-bottom: 20px;
+    margin-bottom: 0%;
+    height: 100%;
 }
 
 
 #trials-card {
     background-color: whitesmoke;
-    border-radius: 10px;
-    height: 120px;
-    padding: 10px;
-    width: 30%;
+    border-radius: 15px;
+    height: 100%;
+    padding: 1%;
+    width: 25%;
 }
 
 #sponsors-card {
     background-color: whitesmoke;
-    border-radius: 10px;
-    height: 120px;
-    padding: 10px;
-    float: right;
+    border-radius: 15px;
+    height: 100%;
+    padding: 1%;
+    width: 25%;
 }
 
 #years-card {
     background-color: whitesmoke;
-    border-radius: 10px;
-    height: 120px;
-    padding: 10px;
-    float: right;
-}
-
-.card-title {
-    text-align: center;
-    font-size: 30px;
-    padding: 10%;
-}
-
-.card-text {
-    font-size: 20px;
-    padding-left: 3%;
+    border-radius: 15px;
+    height: 100%;
+    width: 25%;
+    padding: 1%;
 }
 
 
 #scatter-div {
     background-color: whitesmoke;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 5px;
 }
 
 #bottom-left {
     background-color: whitesmoke;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 5px;
 }
 
 #bottom-right {
     background-color: whitesmoke;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 5px;
 }
 
+#whole-div {
+    height: 98vh;
+    background-color: white;
+}
 
 #top-row {
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 2%;
+    margin-right: 2%;
     overflow: hidden;
+    display: block;
+    height: 8%;
 }
 
 #mid-row {
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
     overflow: hidden;
+    height: 25%;
 }
 
 #bot-row {
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
+    margin-bottom: 2%;
     overflow: hidden;
+    height: 20%
 }
 
 h1 {
-    margin-top: 20px;
-    margin-left: 30px;
-    font-weight: bold;
+    margin-top: 0%;
+    margin-left: 2%;
+    font-size: 30px;
+    font-weight: 500;
 }
 h4 {
     margin-top: 10px;
     margin-left: 10px;
     font-size: 25px;
-    font-weight: bold;
+    font-weight: 500;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+    padding: 1%;
+}
+
+.card-text {
+    font-size: 15px;
+    padding: 0%;
 }

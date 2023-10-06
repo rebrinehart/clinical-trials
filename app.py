@@ -277,12 +277,16 @@ app.layout = html.Div([
             # top half description
             html.Div([
                 dbc.Card([dbc.CardBody([html.P('An analysis of clinical trials with a status of withdrawn, suspended, or terminated —  here referred to as halted trials — to see which medical conditions, phases, or sponsors were historically most halted.', className = 'card-text')])], className = 'row', id = 'desc-card'),
-            ], className = 'six columns', id = 'desc-div'),            
+            ], 
+                className = 'seven columns', 
+                id = 'desc-div'),            
             html.Div([
                 dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'four columns', id = 'trials-card'),                    
                 dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'four columns', id = 'sponsors-card'),      
                 dbc.Card([dbc.CardBody([html.H4('36 years', className = 'card-title')])], className = 'four columns', id = 'years-card'),
-            ], className = 'six columns', id = 'card-div'),
+            ], 
+                className = 'five columns', 
+                id = 'card-div'),
         ], className = 'row', id = 'top-row'),
         
         #for the entire middle row
