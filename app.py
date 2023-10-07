@@ -278,14 +278,14 @@ app.layout = html.Div([
             html.Div([
                 dbc.Card([dbc.CardBody([html.P('An analysis of clinical trials with a status of withdrawn, suspended, or terminated —  here referred to as halted trials — to see which medical conditions, phases, or sponsors were historically most halted.', className = 'card-text')])], className = 'row', id = 'desc-card'),
             ], 
-                className = 'seven columns', 
+                className = 'nine columns', 
                 id = 'desc-div'),            
             html.Div([
-                dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'four columns', id = 'trials-card'),                    
+                dbc.Card([dbc.CardBody([html.H4('1984 - 2020', className = 'card-title')])], className = 'four columns', id = 'years-card'),
                 dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'four columns', id = 'sponsors-card'),      
-                dbc.Card([dbc.CardBody([html.H4('36 years', className = 'card-title')])], className = 'four columns', id = 'years-card'),
+                dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'four columns', id = 'trials-card'),                              
             ], 
-                className = 'five columns', 
+                className = 'three columns', 
                 id = 'card-div'),
         ], className = 'row', id = 'top-row'),
         
@@ -296,12 +296,12 @@ app.layout = html.Div([
                 # pie chart
                 html.Div([
                     html.H4('Halted Trials'),
-                    dcc.Graph(figure = pie, id = 'pie'),
+                    dcc.Graph(figure = pie, responsive = True, id = 'pie'),
                 ], className = 'six columns', id = 'pie-div'),
                 # waffle chart
                 html.Div([
                     html.H4('Statuses'),
-                    dcc.Graph(figure = waf, id = 'waf')
+                    dcc.Graph(figure = waf, responsive = True, id = 'waf')
                 ], className = 'six columns', id = 'waffle-div'),
             ], className = 'six columns', id = 'mid-left'),       
             #right half
