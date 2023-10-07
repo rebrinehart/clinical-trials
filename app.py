@@ -159,12 +159,12 @@ waf.update_layout(
                    title_y = .95,
                    font = dict(size = 16),
                    margin = dict(l = 5, r = 5, t = 5, b = 5),
-                   legend = dict(orientation = 'h',
-                                 itemwidth = 150,
-                                 yanchor = 'bottom',
-                                 y = -.1,
-                                 xanchor = 'left',
-                                 x = -.02,
+                   legend = dict(orientation = 'v',
+                                 # itemwidth = 150,
+                                 # yanchor = 'center',
+                                 # y = -.1,
+                                 # xanchor = 'right',
+                                 # x = -.02,
                                  font = dict(size = 14),
                               )
                   )
@@ -308,7 +308,7 @@ app.layout = html.Div([
             html.Div([
                 html.Div([
                     html.H4('Trial Volume'),
-                    dcc.Graph(figure = scatter, id = 'scatter'),
+                    dcc.Graph(figure = scatter, responsive = True, id = 'scatter'),
                 ], className = 'row', id = 'scatter-div')                
             ], className = 'six columns', id = 'mid-right')
         ], className = 'row', id = 'mid-row'),
@@ -317,12 +317,12 @@ app.layout = html.Div([
         html.Div([
             html.Div([
                 html.H4('Total trial count by status'),
-                dcc.Graph(figure = bar1, id = 'bar1'),
+                dcc.Graph(figure = bar1, responsive = True, id = 'bar1'),
             ], className = 'six columns', id = 'bottom-left'),
     
             html.Div([
                 html.H4('Halted trial count by status'),
-                dcc.Graph(figure = bar2, id = 'bar2'),
+                dcc.Graph(figure = bar2, responsive = True, id = 'bar2'),
             ], className = 'six columns', id = 'bottom-right'),
         ], className = 'row', id = 'bot-row'),
 ], id='whole-div')

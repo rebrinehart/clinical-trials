@@ -11,24 +11,49 @@
     background-color: whitesmoke;
     border-radius: 15px;
     padding: 5px;
+    height: 35vh;
+    width: 33vh;
+    margin-right: 0%;
 }
 
 #pie {
-    width: 100%;
-    height: 50%;
     box-sizing: border-box;
+    width: 100%;
+    height: 29vh;
+    padding-top: 0%;
 }
 
 #waffle-div {
     background-color: whitesmoke;
     border-radius: 15px;
-    height: 60%;
     padding: 5px;
+    height: 35vh;
+    width: 52vh;
+    margin-left: 3%;
 }
 
-#waffle {
-    width: 100%;
+#waf {
     box-sizing: border-box;
+    width: 100%;
+    height: 29vh;
+    padding-top: 0%;
+}
+
+#scatter-div {
+    background-color: whitesmoke;
+    border-radius: 15px;
+    padding: 5px;
+    height: 34vh;
+}
+
+.six.columns {
+}
+
+#scatter {
+    box-sizing: border-box;
+    width: 100%;
+    height: 29vh;
+    padding-top: 0%;
 }
 
 #card-div {
@@ -71,16 +96,17 @@
 }
 
 
-#scatter-div {
+#bottom-left {
     background-color: whitesmoke;
     border-radius: 15px;
     padding: 5px;
 }
 
-#bottom-left {
-    background-color: whitesmoke;
-    border-radius: 15px;
-    padding: 5px;
+#bar1 {
+    box-sizing: border-box;
+    width: 100%;
+    height: 29vh;
+    padding-top: 0%;
 }
 
 #bottom-right {
@@ -89,44 +115,49 @@
     padding: 5px;
 }
 
+#bar2 {
+    box-sizing: border-box;
+    width: 100%;
+    height: 29vh;
+    padding-top: 0%;
+}
+
 #whole-div {
     height: 97vh;
     background-color: white;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 
 #top-row {
-    margin-left: 2%;
-    margin-right: 2%;
     overflow: hidden;
     display: block;
     height: 8%;
 }
 
 #mid-row {
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-top: 1%;
     overflow: hidden;
-    height: 25%;
+    display: block;
+    margin-top: 1%;
+    height: 36%;
 }
 
 #bot-row {
-    margin-left: 2%;
-    margin-right: 2%;
+    display: block;
     margin-top: 1%;
     margin-bottom: 2%;
-    overflow: hidden;
-    height: 20%
+    height: 35%
 }
 
 h1 {
     margin-top: 1%;
-    margin-left: 2%;
+    margin-left: 0%;
     font-size: 30px;
     font-weight: 500;
 }
 h4 {
-    margin-top: 10px;
+    margin-top: 1%;
+    margin-bottom: 0%;
     margin-left: 10px;
     font-size: 25px;
     font-weight: 500;
