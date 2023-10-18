@@ -49,7 +49,8 @@ scatter = px.scatter(data_frame = total_trials,
 scatter.update_layout(title_x = .5,
                    title_y = .9,
                    font = dict(size = 14),
-                   margin = dict(l = 5, r = 5, t = 5, b = 5)
+                   margin = dict(l = 5, r = 5, t = 5, b = 5),
+                   plot_bgcolor = 'white'
                    )
 scatter.update(layout_showlegend = False)
 
@@ -227,9 +228,8 @@ bar1.update_layout(
                       y = -.2,
                       xanchor = 'center',
                       x= .5),
-                  xaxis = dict(ticktext = ['test'])
-#                   title = dict(text = '<b>Halted Trials by Sponsor<b>',
-#                                xanchor = 'left')
+                  xaxis = dict(ticktext = ['test']),
+                  plot_bgcolor = 'white'
                  )
 
 "BAR CHART"
@@ -260,7 +260,8 @@ bar2.update_layout(barmode = 'stack',
                       y = -.2,
                       xanchor = 'center',
                       x= .5),
-                  xaxis = dict(ticktext = ['test'])
+                  xaxis = dict(ticktext = ['test']),
+                  plot_bgcolor = 'white'
                  )
 
 "----------------------------------------------------------------------------------"

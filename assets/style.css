@@ -12,6 +12,7 @@
     background-color: white;
     border-radius: 15px;
     padding: 5px;
+    padding-left: 2%;
     width: 34vh;
     margin-right: 0%;
     box-shadow: 3px 3px 1px whitesmoke;
@@ -28,6 +29,7 @@
     background-color: white;
     border-radius: 15px;
     padding: 5px;
+    padding-left: 2%;
     width: 52vh;
     margin-left: 4%;
     box-shadow: 3px 3px 1px whitesmoke;
@@ -37,7 +39,9 @@
     box-sizing: border-box;
     width: 100%;
     height: 27vh;
-    padding-top: 0%;
+    padding-left: 2%;
+    padding-bottom: 1%;
+    padding-right: 3%;
 }
 
 #scatter-div {
@@ -165,7 +169,7 @@ h1 {
 h4 {
     margin-top: 1%;
     margin-bottom: 0%;
-    margin-left: 10px;
+    padding-left: 2%;
     font-size: 25px;
     font-weight: 500;
 }
