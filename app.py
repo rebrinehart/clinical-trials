@@ -234,15 +234,15 @@ bar1.update_layout(
 
 "BAR CHART"
 bar2 = go.Figure(data = [
-    go.Bar(name = 'Withdrawn', 
-           y = haltsp_df['Withdrawn Trials'],
-           x = haltsp_df.index.values,
-           marker = dict(color = 'rgb(252, 141, 98)')
-          ),
     go.Bar(name = 'Suspended', 
            y = haltsp_df['Suspended Trials'],
            x = haltsp_df.index.values,
            marker = dict(color = 'rgb(252, 200, 179)')
+          ),
+    go.Bar(name = 'Withdrawn', 
+           y = haltsp_df['Withdrawn Trials'],
+           x = haltsp_df.index.values,
+           marker = dict(color = 'rgb(252, 141, 98)')
           ),
     go.Bar(name = 'Terminated', 
            y = haltsp_df['Terminated Trials'],
