@@ -19,6 +19,9 @@ clin_trials = pd.read_csv(r"clin_trials.csv")
 clin_trials.head()
 
 "------------------------------------------------------------------------------------"
+"""Color Palette"""
+cp = ['#F79256', '#FBD1A2', '#7DCFB6', '#00B2CA', '#1D4E89']
+
 """# Graphs"""
 
 "SCATTER PLOT"
@@ -40,7 +43,8 @@ total_trials
 scatter = px.scatter(data_frame = total_trials,
 #                   title = '<b>Clinical Trials Per Year from 1984 - 2020<b>',
                   labels = {'index':'Trial Start Date', 'value': 'Number of Trials'},
-                  color_discrete_sequence = [px.colors.qualitative.Pastel[0]])
+                  color_discrete_sequence = [cp[2]]
+                  )
 
 scatter.update_layout(title_x = .5,
                    title_y = .9,
@@ -68,11 +72,12 @@ pie = go.Figure(go.Pie(labels = ['Halted', 'Other'],
                        pull = [0, 0.2],
                        rotation = 90,
                        text = ['Halted', 'Other'],
-                       textposition = 'outside',
+                       textposition = 'outside'
                        #textfont = dict()
                       ))
 pie.update_layout(
     margin = dict(l = 0, r = 0, t = 0, b = 0))
+pie.update_traces(marker = dict(colors = [cp[3], cp[1]]))
 
 "WAFFLE CHART"
 dfs = []
@@ -130,7 +135,7 @@ waf.add_trace(go.Heatmap(z = tMatrix,
                           xgap = 3,
                           ygap = 3,
                           name = 'Terminated (80.7%)',
-                          colorscale = [(0.00, "#440154"), (1.0, "#440154")],
+                          colorscale = [(0.00, cp[0]), (1.0, cp[0])],
                           showscale = False,
                           showlegend = True
                           ))
@@ -139,7 +144,7 @@ waf.add_trace(go.Heatmap(z = wMatrix,
                           xgap = 3,
                           ygap = 3,
                           name = 'Withdrawn (18.3%)',
-                          colorscale = [(0.00, "#fde725"), (1.0, "#fde725")],
+                          colorscale = [(0.00, cp[1]), (1.0, cp[1])],
                           showscale = False,
                           showlegend = True
                           ))
@@ -148,7 +153,7 @@ waf.add_trace(go.Heatmap(z = sMatrix,
                           xgap = 3,
                           ygap = 3,
                           name = 'Suspended (1.0%)',
-                          colorscale = [(0.00, "#A72608"), (1.0, "#A72608")],
+                          colorscale = [(0.00, cp[2]), (1.0, cp[2])],
                           showscale = False,
                           showlegend = True
                           ))
@@ -204,12 +209,12 @@ bar1 = go.Figure()
 bar1.add_trace(go.Bar(name = 'Halted Trials',
                      x = haltsp_df.index.values,
                      y = haltsp_df['Halted Trials'],
-                     marker = dict(color = 'rgb(252, 141, 98)'),
+                     marker = dict(color = cp[3]),
                     ))
 bar1.add_trace(go.Bar(name = 'Total Trials',
                      x = haltsp_df.index.values,
                      y = haltsp_df['Total Trials'],
-                     marker = dict(color = 'rgb(252, 200, 179)'),
+                     marker = dict(color = '#bbe9f0'),
                     ))
 
 bar1.update_layout(
