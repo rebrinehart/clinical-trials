@@ -1,49 +1,53 @@
 
 #desc-div {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     width: 66%;
     height: 100%;
     margin-right: 0%;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 #pie-div {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     padding: 5px;
     height: 35vh;
     width: 33vh;
     margin-right: 0%;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 #pie {
     box-sizing: border-box;
     width: 100%;
-    height: 29vh;
+    height: 27vh;
     padding-top: 0%;
 }
 
 #waffle-div {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     padding: 5px;
     height: 35vh;
-    width: 52vh;
+    width: 47vh;
     margin-left: 3%;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 #waf {
     box-sizing: border-box;
     width: 100%;
-    height: 29vh;
+    height: 27vh;
     padding-top: 0%;
 }
 
 #scatter-div {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     padding: 5px;
     height: 34vh;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 .six.columns {
@@ -52,7 +56,7 @@
 #scatter {
     box-sizing: border-box;
     width: 100%;
-    height: 29vh;
+    height: 27vh;
     padding-top: 0%;
 }
 
@@ -62,44 +66,50 @@
     width: 34%;
     float: right;
     margin-left: 0%;
+    
 }
 
 
 #trials-card {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     height: 100%;
     padding: 1%;
     width: 30%;
     float: right;
     margin-left: 0%;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 #sponsors-card {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     height: 100%;
     padding: 1%;
     width: 30%;
     float: right;
     margin-left: 3%;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 #years-card {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     height: 100%;
     padding: 1%;
     width: 30%;
     float: right;
     margin-left: 3%;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 
 #bottom-left {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     padding: 5px;
+    height: 38vh;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 #bar1 {
@@ -110,9 +120,11 @@
 }
 
 #bottom-right {
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 15px;
     padding: 5px;
+    height: 38vh;
+    box-shadow: 3px 3px 1px whitesmoke;
 }
 
 #bar2 {
@@ -122,36 +134,39 @@
     padding-top: 0%;
 }
 
-#whole-div {
-    height: 97vh;
-    background-color: white;
-    margin-left: 4%;
-    margin-right: 4%;
-}
 
 #top-row {
-    overflow: hidden;
     display: block;
     height: 8%;
+    overflow: visible;
 }
 
 #mid-row {
-    overflow: hidden;
     display: block;
     margin-top: 1%;
-    height: 36%;
+    height: 33vh;
+    padding-bottom: 2vh;
 }
 
 #bot-row {
     display: block;
     margin-top: 1%;
-    margin-bottom: 2%;
+    padding-bottom: 2%;
     height: 35%
+    overflow: visible;
 }
 
+#whole-div {
+    height: 96vh;
+    background-color: ghostwhite;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 1%;
+
+
 h1 {
-    margin-top: 1%;
-    margin-left: 0%;
+    padding-top: 1%;
+    margin-left: 1%;
     font-size: 30px;
     font-weight: 500;
 }
@@ -168,12 +183,12 @@ h4 {
     font-size: 25px;
     font-weight: 400;
     padding-top: 5%;
-    padding-right: 2%;
+    padding-right: 5%;
 }
 
 .card-text {
-    font-size: 20px;
-    width: 100%;
+    font-size: 25px;
+    width: 110vh;
     height: 100%;
     padding-left: 1%;
     padding-top: 0.25%;

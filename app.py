@@ -271,7 +271,6 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-
         # for the title
         html.Div([
             html.H1('Clinical Trials Dashboard')
