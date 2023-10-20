@@ -42,7 +42,7 @@ total_trials
 #creating the figure
 scatter = px.scatter(data_frame = total_trials,
 #                   title = '<b>Clinical Trials Per Year from 1984 - 2020<b>',
-                  labels = {'index':'Trial Start Date', 'value': 'Number of Trials'},
+                  labels = {'Start_Date':'Trial Start Date', 'value': 'Number of Trials'},
                   color_discrete_sequence = [cp[2]]
                   )
 
@@ -53,6 +53,7 @@ scatter.update_layout(title_x = .5,
                    plot_bgcolor = 'white'
                    )
 scatter.update(layout_showlegend = False)
+scatter.update_layout(font = dict(family = 'Gabarito', size = 18))
 
 "DONUT CHART"
 # place all halted trials in their own dataframe
@@ -79,6 +80,8 @@ pie = go.Figure(go.Pie(labels = ['Halted', 'Other'],
 pie.update_layout(
     margin = dict(l = 0, r = 0, t = 0, b = 0))
 pie.update_traces(marker = dict(colors = [cp[3], cp[1]]))
+
+pie.update_layout(font = dict(family = 'Gabarito', size = 16))
 
 "WAFFLE CHART"
 dfs = []
@@ -174,6 +177,7 @@ waf.update_layout(
                                  font = dict(size = 14),
                               )
                   )
+waf.update_layout(font = dict(family = 'Gabarito', size = 16))
 
 waf.update_yaxes(showticklabels = False)
 waf.update_xaxes(showticklabels = False)
@@ -220,8 +224,10 @@ bar1.add_trace(go.Bar(name = 'Total Trials',
 
 bar1.update_layout(
                   barmode = 'stack',
-                  yaxis_title = 'Clinical Trials',
-                  margin = dict(l = 5, r = 5, t = 5, b = 5),
+                  yaxis_title = 'Number of Trials',
+                  width = 1000,
+                  height = 1000,
+                  margin = dict(l = 0, r = 0, t = 0, b = 0, pad = 0),
                   legend = dict(
                       orientation = 'h',
                       yanchor = 'bottom',
@@ -229,30 +235,31 @@ bar1.update_layout(
                       xanchor = 'center',
                       x= .5),
                   xaxis = dict(ticktext = ['test']),
-                  plot_bgcolor = 'white'
+                  plot_bgcolor = 'white',
                  )
+bar1.update_layout(font = dict(family = 'Gabarito', size = 15))
 
 "BAR CHART"
 bar2 = go.Figure(data = [
     go.Bar(name = 'Suspended', 
            y = haltsp_df['Suspended Trials'],
            x = haltsp_df.index.values,
-           marker = dict(color = 'rgb(252, 200, 179)')
+           marker = dict(color = cp[2])
           ),
     go.Bar(name = 'Withdrawn', 
            y = haltsp_df['Withdrawn Trials'],
            x = haltsp_df.index.values,
-           marker = dict(color = 'rgb(252, 141, 98)')
+           marker = dict(color = cp[1])
           ),
     go.Bar(name = 'Terminated', 
            y = haltsp_df['Terminated Trials'],
            x = haltsp_df.index.values,
-           marker = dict(color = 'rgb(252, 100, 179)')
+           marker = dict(color = cp[0])
           ),
 ])
 
 bar2.update_layout(barmode = 'stack',
-                  yaxis_title = 'Clinical Trials',
+                  yaxis_title = 'Number of Trials',
                   margin = dict(l = 5, r = 5, t = 5, b = 5),
                   legend = dict(
                       orientation = 'h',
@@ -263,6 +270,7 @@ bar2.update_layout(barmode = 'stack',
                   xaxis = dict(ticktext = ['test']),
                   plot_bgcolor = 'white'
                  )
+bar2.update_layout(font = dict(family = 'Gabarito', size = 15))
 
 "----------------------------------------------------------------------------------"
 """# Create Dashboard"""
@@ -274,8 +282,9 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div([
         # for the title
         html.Div([
-            html.H1('Clinical Trials Dashboard')
-        ], id = 'title'),
+            html.Div([html.H1('Clinical Trials Dashboard')], className = 'ten columns', id = 'title'),
+            html.Div([html.H3('Data from Aero Data Lab')], className = 'two columns', id = 'credit')
+        ], className = 'row', id = 'title-row'),
         
         #for the top row
         html.Div([
@@ -288,7 +297,7 @@ app.layout = html.Div([
             html.Div([
                 dbc.Card([dbc.CardBody([html.H4('1984 - 2020', className = 'card-title')])], className = 'four columns', id = 'years-card'),
                 dbc.Card([dbc.CardBody([html.H4('10 sponsors', className = 'card-title')])], className = 'four columns', id = 'sponsors-card'),      
-                dbc.Card([dbc.CardBody([html.H4('13,748 Trials', className = 'card-title')])], className = 'four columns', id = 'trials-card'),                              
+                dbc.Card([dbc.CardBody([html.H4('13,748 trials', className = 'card-title')])], className = 'four columns', id = 'trials-card'),                              
             ], 
                 className = 'three columns', 
                 id = 'card-div'),
@@ -300,7 +309,7 @@ app.layout = html.Div([
             html.Div([
                 # pie chart
                 html.Div([
-                    html.H4('Halted Trials'),
+                    html.H4('Halted trials'),
                     dcc.Graph(figure = pie, responsive = True, id = 'pie'),
                 ], className = 'six columns', id = 'pie-div'),
                 # waffle chart
@@ -312,7 +321,7 @@ app.layout = html.Div([
             #right half
             html.Div([
                 html.Div([
-                    html.H4('Trial Volume'),
+                    html.H4('Trial volume'),
                     dcc.Graph(figure = scatter, responsive = True, id = 'scatter'),
                 ], className = 'row', id = 'scatter-div')                
             ], className = 'six columns', id = 'mid-right')

@@ -5,7 +5,7 @@
     width: 66%;
     height: 100%;
     margin-right: 0%;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 #pie-div {
@@ -15,7 +15,7 @@
     padding-left: 2%;
     width: 34vh;
     margin-right: 0%;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 #pie {
@@ -30,9 +30,9 @@
     border-radius: 15px;
     padding: 5px;
     padding-left: 2%;
-    width: 52vh;
+    width: 51vh;
     margin-left: 4%;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 #waf {
@@ -48,7 +48,7 @@
     background-color: white;
     border-radius: 15px;
     padding: 5px;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 .six.columns {
@@ -71,36 +71,36 @@
 
 
 #trials-card {
-    background-color: white;
+    background-color: rgba(251, 209, 162, 0.7);
     border-radius: 15px;
     height: 100%;
     padding: 1%;
     width: 30%;
     float: right;
     margin-left: 0%;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 #sponsors-card {
-    background-color: white;
+    background-color: rgba(192, 240, 225, 0.7);
     border-radius: 15px;
     height: 100%;
     padding: 1%;
     width: 30%;
     float: right;
     margin-left: 3%;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 #years-card {
-    background-color: white;
+    background-color: rgba(187, 233, 240, 0.7);
     border-radius: 15px;
     height: 100%;
     padding: 1%;
     width: 30%;
     float: right;
     margin-left: 3%;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 
@@ -108,13 +108,13 @@
     background-color: white;
     border-radius: 15px;
     padding: 5px;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 #bar1 {
     box-sizing: border-box;
     width: 100%;
-    height: 29vh;
+    height: 30vh;
     padding-top: 0%;
 }
 
@@ -122,18 +122,18 @@
     background-color: white;
     border-radius: 15px;
     padding: 5px;
-    box-shadow: 3px 3px 1px whitesmoke;
+    box-shadow: 3px 3px 1px gainsboro;
 }
 
 #bar2 {
     box-sizing: border-box;
     width: 100%;
-    height: 29vh;
+    height: 30vh;
     padding-top: 0%;
 }
 
 #whole-div {
-    height: 97vh;
+    height: 98vh;
     background-color: ghostwhite;
     padding-left: 4%;
     padding-right: 4%;
@@ -141,36 +141,46 @@
 }
 
 #top-row {
-    overflow: hidden;
+    overflow: visible;
     display: block;
     height: 8%;
+    padding-bottom: 1.5%;
 }
 
 #mid-row {
     overflow: visible;
     display: block;
-    margin-top: 1%;
+    margin-top: 0%;
     height: 32vh;
 }
 
 #bot-row {
     display: block;
-    margin-top: 1%;
-    margin-bottom: 2%;
+    margin-top: 1.5%;
+    margin-bottom: 0%;
     height: 35%
 }
 
 h1 {
     padding-top: 1%;
-    margin-left: 1%;
-    font-size: 35px;
+    margin-left: 0%;
+    font-size: 40px;
     font-weight: 500;
 }
+
+h3 {
+    padding-top: 10%;
+    margin-left: 0%;
+    font-size: 20px;
+    font-weight: 500;
+    float: right;
+}
+
 h4 {
     margin-top: 1%;
     margin-bottom: 0%;
     padding-left: 2%;
-    font-size: 25px;
+    font-size: 27px;
     font-weight: 500;
 }
 
@@ -179,14 +189,13 @@ h4 {
     font-size: 33px;
     font-weight: 400;
     padding-top: 5%;
-    padding-right: 5%;
+    padding-right: 4%;
 }
 
 .card-text {
     font-size: 20px;
-    width: 100%;
+    width: 98%;
     height: 100%;
-    padding-left: 1%;
     margin-right: 1%;
     padding-top: 0.5%;
     margin-left: 1%;
