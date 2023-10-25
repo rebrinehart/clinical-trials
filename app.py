@@ -73,8 +73,9 @@ pie = go.Figure(go.Pie(labels = ['Halted', 'Other'],
                        opacity = 0.8,
                        pull = [0, 0.2],
                        rotation = 90,
-                       text = ['Halted', 'Other'],
-                       textposition = 'outside'
+                       text = ['Halted', 'All<br>other'],
+                       textposition = 'outside',
+                       
                        #textfont = dict()
                       ))
 pie.update_layout(
@@ -183,42 +184,39 @@ waf.update_yaxes(showticklabels = False)
 waf.update_xaxes(showticklabels = False)
 
 
-"BAR CHART - TOTAL VS HALTED"
+"BAR CHART 1 - TOTAL VS HALTED TRIALS"
 # share of all halted trials by sponsor
 haltsp_df = pd.DataFrame()
-haltsp_df['Total Trials'] = clin_trials.groupby(['Sponsor']).size()
-haltsp_df['Halted Trials'] = halt_df.groupby(['Sponsor']).size().sort_values(ascending = False)
-haltsp_df['% Halted wrt Total'] = (haltsp_df['Halted Trials'] / len(halt_df)) * 100
-haltsp_df['% Halted wrt Sponsor Total'] = (haltsp_df['Halted Trials'] / haltsp_df['Total Trials']) * 100
-haltsp_df['%Other'] = (100 - haltsp_df['% Halted wrt Sponsor Total'])
+halted_counts = halt_df.groupby('Sponsor').size().reset_index(name = 'Halted')
+total_counts = clin_trials.groupby('Sponsor').size().reset_index(name = 'Total')
+haltsp_df = pd.merge(halted_counts, total_counts, on='Sponsor', how = 'outer')
+haltsp_df.fillna(0, inplace=True)
+haltsp_df['Percent'] = (haltsp_df['Halted']/haltsp_df['Total']).map('{:.2%}'.format)
 
-# share of all withdrawn trials by sponsor
-haltsp_df['Withdrawn Trials'] = halt_df[halt_df['Status'] == 'Withdrawn'].groupby(['Sponsor']).size()
-haltsp_df['% of Withdrawn Trials'] = (haltsp_df['Withdrawn Trials'] / (len(halt_df[halt_df['Status'] == 'Withdrawn']))) * 100
-haltsp_df['% Withdrawn wrt Sponsor Total'] = (haltsp_df['Withdrawn Trials'] / haltsp_df['Total Trials']) * 100
+# create the dataframe of top 10 conditions
+bar1_df = haltsp_df.sort_values(by = 'Total', ascending = False).head(10)
 
-# share of all terminated trials by sponsor
-haltsp_df['Terminated Trials'] = halt_df[halt_df['Status'] == 'Terminated'].groupby(['Sponsor']).size()
-haltsp_df['% of Terminated Trials'] = (haltsp_df['Terminated Trials'] / (len(halt_df[halt_df['Status'] == 'Terminated']))) * 100
-haltsp_df['% Terminated wrt Sponsor Total'] = (haltsp_df['Terminated Trials'] / haltsp_df['Total Trials']) * 100
-
-# share of all suspended trials by sponsor
-haltsp_df['Suspended Trials'] = halt_df[halt_df['Status'] == 'Suspended'].groupby(['Sponsor']).size()
-haltsp_df['% of Suspended Trials'] = (haltsp_df['Suspended Trials'] / (len(halt_df[halt_df['Status'] == 'Suspended']))) * 100
-haltsp_df['% Suspended wrt Sponsor Total'] = (haltsp_df['Suspended Trials'] / haltsp_df['Total Trials']) * 100
-
-haltsp_df = haltsp_df.sort_values(by = 'Total Trials', ascending = False)
+# create the dict for text annotations
+xi = bar1_df['Sponsor']
+yi = bar1_df['Halted']
+annoText = bar1_df['Percent']
+annotationsDict = [dict(
+    x = xcoord,
+    y = ycoord + 80,
+    text = annoText,
+    showarrow = False,
+) for xcoord, ycoord, annoText in zip(xi, yi, annoText)]
 
 # create the bar chart
 bar1 = go.Figure()
 bar1.add_trace(go.Bar(name = 'Halted Trials',
-                     x = haltsp_df.index.values,
-                     y = haltsp_df['Halted Trials'],
+                     x = bar1_df['Sponsor'],
+                     y = bar1_df['Halted'],
                      marker = dict(color = cp[3]),
                     ))
 bar1.add_trace(go.Bar(name = 'Total Trials',
-                     x = haltsp_df.index.values,
-                     y = haltsp_df['Total Trials'],
+                     x = bar1_df['Sponsor'],
+                     y = bar1_df['Total'],
                      marker = dict(color = '#bbe9f0'),
                     ))
 
@@ -236,40 +234,78 @@ bar1.update_layout(
                       x= .5),
                   xaxis = dict(ticktext = ['test']),
                   plot_bgcolor = 'white',
+                  annotations = annotationsDict
                  )
 bar1.update_layout(font = dict(family = 'Gabarito', size = 15))
 
-"BAR CHART"
-bar2 = go.Figure(data = [
-    go.Bar(name = 'Suspended', 
-           y = haltsp_df['Suspended Trials'],
-           x = haltsp_df.index.values,
-           marker = dict(color = cp[2])
-          ),
-    go.Bar(name = 'Withdrawn', 
-           y = haltsp_df['Withdrawn Trials'],
-           x = haltsp_df.index.values,
-           marker = dict(color = cp[1])
-          ),
-    go.Bar(name = 'Terminated', 
-           y = haltsp_df['Terminated Trials'],
-           x = haltsp_df.index.values,
-           marker = dict(color = cp[0])
-          ),
-])
+"BAR CHART 2 - TOTAL VS HALTED TOP 10 CONDITIONS"
+
+# create the dataframe for plotting
+halt_cond = pd.DataFrame()
+halted_counts = halt_df.groupby('Condition').size().reset_index(name = 'Halted')
+total_counts = clin_trials.groupby('Condition').size().reset_index(name = 'Total')
+halt_cond = pd.merge(halted_counts, total_counts, on='Condition', how = 'outer')
+halt_cond.fillna(0, inplace=True)
+halt_cond['Percent'] = (halt_cond['Halted']/halt_cond['Total']).map('{:.2%}'.format)
+
+# create the dataframe of top 10 conditions
+bar2_df = halt_cond.sort_values(by = 'Total', ascending = False).head(10)
+
+# create the dict for text annotations
+xi = bar2_df['Condition']
+yi = bar2_df['Halted']
+annoText = bar2_df['Percent']
+annotationsDict = [dict(
+    x = xcoord,
+    y = ycoord + 20,
+    text = annoText,
+    showarrow = False,
+) for xcoord, ycoord, annoText in zip(xi, yi, annoText)]
+
+
+bar2 = go.Figure()
+bar2.add_trace(go.Bar(name = 'Halted Trials', 
+                     x = bar2_df['Condition'],
+                     y = bar2_df['Halted'],
+                     marker = dict(color = 'rgb(252, 141, 98)'),
+                    ))
+bar2.add_trace(go.Bar(name = 'Total Trials', 
+                     x = bar2_df['Condition'],
+                     y = bar2_df['Total'],
+                     marker = dict(color = 'rgb(252, 200, 179)'),
+                    ))
 
 bar2.update_layout(barmode = 'stack',
-                  yaxis_title = 'Number of Trials',
-                  margin = dict(l = 5, r = 5, t = 5, b = 5),
+                  yaxis_title = 'Clinical Trials',
+                  width = 1000,
+                  height = 1000,
+                  margin = dict(l = 0, r = 0, t = 0, b = 0, pad = 0),
                   legend = dict(
                       orientation = 'h',
                       yanchor = 'bottom',
-                      y = -.2,
+                      y = -.3,
                       xanchor = 'center',
                       x= .5),
-                  xaxis = dict(ticktext = ['test']),
-                  plot_bgcolor = 'white'
+                   annotations = annotationsDict,
+                   plot_bgcolor = 'white'
+                  )
+
+bar2.update_xaxes(tickmode = 'array',
+                  tickangle = 0,
+                  tickvals = list(range(10)),
+                  ticktext = ['Diabetes<br>Mellitus,<br>Type 2', 
+                              'Breast<br>Neoplasms', 
+                              'Pulmonary<br>Disease,<br>Chronic Obstructive', 
+                              'Hypertension', 
+                              'Asthma', 
+                              'Arthritis,<br>Rheumatoid', 
+                              'Influenza,<br>Human', 
+                              'Schizophrenia', 
+                              'Diabetes<br>Mellitus', 
+                              'Alzheimer<br>Disease']
                  )
+
+bar2.show()
 bar2.update_layout(font = dict(family = 'Gabarito', size = 15))
 
 "----------------------------------------------------------------------------------"
@@ -314,14 +350,14 @@ app.layout = html.Div([
                 ], className = 'six columns', id = 'pie-div'),
                 # waffle chart
                 html.Div([
-                    html.H4('Statuses'),
+                    html.H4('Statuses within halted trials'),
                     dcc.Graph(figure = waf, responsive = True, id = 'waf')
                 ], className = 'six columns', id = 'waffle-div'),
             ], className = 'six columns', id = 'mid-left'),       
             #right half
             html.Div([
                 html.Div([
-                    html.H4('Trial volume'),
+                    html.H4('Total trial volume'),
                     dcc.Graph(figure = scatter, responsive = True, id = 'scatter'),
                 ], className = 'row', id = 'scatter-div')                
             ], className = 'six columns', id = 'mid-right')
@@ -330,12 +366,12 @@ app.layout = html.Div([
         #for entire bottom row
         html.Div([
             html.Div([
-                html.H4('Total trial count by status'),
+                html.H4('Halted trials by sponsor'),
                 dcc.Graph(figure = bar1, responsive = True, id = 'bar1'),
             ], className = 'six columns', id = 'bottom-left'),
     
             html.Div([
-                html.H4('Halted trial count by status'),
+                html.H4('Halted trials for the top 10 conditions'),
                 dcc.Graph(figure = bar2, responsive = True, id = 'bar2'),
             ], className = 'six columns', id = 'bottom-right'),
         ], className = 'row', id = 'bot-row'),
