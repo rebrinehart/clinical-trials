@@ -276,7 +276,7 @@ bar2.add_trace(go.Bar(name = 'Total Trials',
                     ))
 
 bar2.update_layout(barmode = 'stack',
-                  yaxis_title = 'Clinical Trials',
+                  yaxis_title = 'Number of Trials',
                   width = 1000,
                   height = 1000,
                   margin = dict(l = 0, r = 0, t = 0, b = 0, pad = 0),
