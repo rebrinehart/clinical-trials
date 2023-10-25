@@ -161,6 +161,17 @@
     height: 35%
 }
 
+#citation-div {
+    width: 35%;
+    padding-left: 64.5%;
+    text-align: right;
+    padding-top: 1%;
+}
+
+h5 {
+    font-size: 14px;
+}
+
 h1 {
     padding-top: 1%;
     margin-left: 0%;

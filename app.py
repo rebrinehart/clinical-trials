@@ -319,7 +319,7 @@ app.layout = html.Div([
         # for the title
         html.Div([
             html.Div([html.H1('Clinical Trials Dashboard')], className = 'ten columns', id = 'title'),
-            html.Div([html.H3('Data from Aero Data Lab')], className = 'two columns', id = 'credit')
+            html.Div([html.H3('Data from Aero Data Lab\u00B9')], className = 'two columns', id = 'credit')
         ], className = 'row', id = 'title-row'),
         
         #for the top row
@@ -375,6 +375,12 @@ app.layout = html.Div([
                 dcc.Graph(figure = bar2, responsive = True, id = 'bar2'),
             ], className = 'six columns', id = 'bottom-right'),
         ], className = 'row', id = 'bot-row'),
+        
+        #for the citation row
+        html.Div([
+            html.H5('\u00B9Hey, Spencer, 2019, "Data for "A Bird’s Eye View of Pharmaceutical Research and Development"", \
+                              https://doi.org/10.7910/DVN/S8C77Q, Harvard Dataverse, V1, UNF:6:xsVhMaTHu37CH2L9bPIuGw== [fileUNF]')
+        ], className = 'row', id = 'citation-div')
 ], id='whole-div')
 
 
