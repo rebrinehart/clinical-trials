@@ -267,12 +267,12 @@ bar2 = go.Figure()
 bar2.add_trace(go.Bar(name = 'Halted Trials', 
                      x = bar2_df['Condition'],
                      y = bar2_df['Halted'],
-                     marker = dict(color = 'rgb(252, 141, 98)'),
+                     marker = dict(color = cp[0]),
                     ))
 bar2.add_trace(go.Bar(name = 'Total Trials', 
                      x = bar2_df['Condition'],
                      y = bar2_df['Total'],
-                     marker = dict(color = 'rgb(252, 200, 179)'),
+                     marker = dict(color = 'rgb(251, 209, 162)'),
                     ))
 
 bar2.update_layout(barmode = 'stack',
@@ -326,7 +326,7 @@ app.layout = html.Div([
         html.Div([
             # top half description
             html.Div([
-                dbc.Card([dbc.CardBody([html.P('An analysis of clinical trials with a status of withdrawn, suspended, or terminated —  here referred to as halted trials — to see which medical conditions, phases, or sponsors were historically most halted.', className = 'card-text')])], className = 'row', id = 'desc-card'),
+                dbc.Card([dbc.CardBody([html.P('An analysis of clinical trials with a status of withdrawn, suspended, or terminated —  here referred to as halted trials — to investigate a pattern of which trials were historically most halted.', className = 'card-text')])], className = 'row', id = 'desc-card'),
             ], 
                 className = 'nine columns', 
                 id = 'desc-div'),            
@@ -345,12 +345,12 @@ app.layout = html.Div([
             html.Div([
                 # pie chart
                 html.Div([
-                    html.H4('Halted trials'),
+                    html.H4('Share of halted trials'),
                     dcc.Graph(figure = pie, responsive = True, id = 'pie'),
                 ], className = 'six columns', id = 'pie-div'),
                 # waffle chart
                 html.Div([
-                    html.H4('Statuses within halted trials'),
+                    html.H4('Halted trials by status'),
                     dcc.Graph(figure = waf, responsive = True, id = 'waf')
                 ], className = 'six columns', id = 'waffle-div'),
             ], className = 'six columns', id = 'mid-left'),       
