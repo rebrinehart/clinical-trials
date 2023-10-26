@@ -191,7 +191,7 @@ halted_counts = halt_df.groupby('Sponsor').size().reset_index(name = 'Halted')
 total_counts = clin_trials.groupby('Sponsor').size().reset_index(name = 'Total')
 haltsp_df = pd.merge(halted_counts, total_counts, on='Sponsor', how = 'outer')
 haltsp_df.fillna(0, inplace=True)
-haltsp_df['Percent'] = (haltsp_df['Halted']/haltsp_df['Total']).map('{:.2%}'.format)
+haltsp_df['Percent'] = (haltsp_df['Halted']/haltsp_df['Total']).map('{:.1%}'.format)
 
 # create the dataframe of top 10 conditions
 bar1_df = haltsp_df.sort_values(by = 'Total', ascending = False).head(10)
@@ -246,7 +246,7 @@ halted_counts = halt_df.groupby('Condition').size().reset_index(name = 'Halted')
 total_counts = clin_trials.groupby('Condition').size().reset_index(name = 'Total')
 halt_cond = pd.merge(halted_counts, total_counts, on='Condition', how = 'outer')
 halt_cond.fillna(0, inplace=True)
-halt_cond['Percent'] = (halt_cond['Halted']/halt_cond['Total']).map('{:.2%}'.format)
+halt_cond['Percent'] = (halt_cond['Halted']/halt_cond['Total']).map('{:.1%}'.format)
 
 # create the dataframe of top 10 conditions
 bar2_df = halt_cond.sort_values(by = 'Total', ascending = False).head(10)
