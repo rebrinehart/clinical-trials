@@ -42,7 +42,7 @@ total_trials
 #creating the figure
 scatter = px.scatter(data_frame = total_trials,
 #                   title = '<b>Clinical Trials Per Year from 1984 - 2020<b>',
-                  labels = {'index':'Start Date', 'value': 'Number of Trials'},
+                  labels = {'index':'Start Date', 'value': 'Number of Trials', 'Start_Date' : 'Start Date'},
                   color_discrete_sequence = [cp[2]]
                   )
 
