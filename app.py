@@ -193,8 +193,8 @@ haltsp_df = pd.merge(halted_counts, total_counts, on='Sponsor', how = 'outer')
 haltsp_df.fillna(0, inplace=True)
 haltsp_df['Percent'] = (haltsp_df['Halted']/haltsp_df['Total']).map('{:.1%}'.format)
 
-# create the dataframe of top 10 conditions
-bar1_df = haltsp_df.sort_values(by = 'Total', ascending = False).head(10)
+# create the dataframe for plotting
+bar1_df = haltsp_df.sort_values(by = 'Total', ascending = False)
 
 # create the dict for text annotations
 xi = bar1_df['Sponsor']
